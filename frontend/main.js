@@ -22,4 +22,4 @@ let fizzBuzz = function (input) {
     });
 };
 
-export default hECMAthlon;
+// export default hECMAthlon;
