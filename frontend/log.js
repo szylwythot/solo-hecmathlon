@@ -63,12 +63,9 @@ function getOutput(output) {
 }
 
 function logResult(place, values){
-    while(place.firstChild) {
-        place.firstChild.remove();
-    }
-    for (let j = 0; j < values.length; j++) {
-        place.insertAdjacentHTML("beforeend", "<div>" + values[j] + "</div>");
-    }
+    place.innerHTML = "";
+    let htmlResult = values.map(resultItem => "<div>" + resultItem + "</div>").join("");
+    place.insertAdjacentHTML(`beforeend`, htmlResult);
 }
 
 init();
