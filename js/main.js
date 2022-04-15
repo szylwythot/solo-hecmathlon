@@ -4,7 +4,7 @@ class Hecmathlon{
     };
 
     static getMaxValue = function (input) {
-        return input.split(",").reduce((previous,current) => (previous < current) ? current : previous);
+        return [input.split(",").reduce((previous,current) => (previous < current) ? current : previous)];
     };
     
     static getGreaterThan = function (input) {

@@ -33,9 +33,6 @@ function init() {
 }
 
 function getOutput(output) {
-    if(!Array.isArray(output)){
-        output = [output];
-    }
     return ["The function starts", ...output, "The function ends"];
 }
 
