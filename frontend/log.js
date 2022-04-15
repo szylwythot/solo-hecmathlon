@@ -1,28 +1,30 @@
 // import hECMAthlon from "./main.js"
 
-function Hecmathlon(input, callFunction){
-    this.result = () => callFunction(input);
+class Hecmathlon{
+    constructor(input, callFunction){
+        this.result = () => callFunction(input);
+    };
+
+    static getMaxValue = function (input) {
+        return input.split(",").reduce((previous,current) => (previous < current) ? current : previous);
+    };
+    
+    static getGreaterThan = function (input) {
+        return Array.from(Array(10).keys(), (value, index) => index + 1).filter((number) => number > input);
+    };
+    
+    static fizzBuzz = function (input) {
+        return [...Array(parseInt(input)).keys()].map((value, i) => {
+            let index = i + 1;
+            let result;
+            if(index % 5 === 0 && index % 3 === 0) result = "FizzBuzz";
+            else if(index % 3 === 0) result = "Fizz";
+            else if(index % 5 === 0) result = "Buzz";
+            else result = index;
+            return result;
+        });
+    };
 }
-
-let getMaxValue = function (input) {
-    return input.split(",").reduce((previous,current) => (previous < current) ? current : previous);
-};
-
-let getGreaterThan = function (input) {
-    return Array.from(Array(10).keys(), (value, index) => index + 1).filter((number) => number > input);
-};
-
-let fizzBuzz = function (input) {
-    return [...Array(parseInt(input)).keys()].map((value, i) => {
-        index = i + 1;
-        let result;
-        if(index % 5 === 0 && index % 3 === 0) result = "FizzBuzz";
-        else if(index % 3 === 0) result = "Fizz";
-        else if(index % 5 === 0) result = "Buzz";
-        else result = index;
-        return result;
-    });
-};
 
 function init() {
 
@@ -39,23 +41,27 @@ function init() {
     const fizzBuzzRoot = document.querySelector(".fizzBuzz__container");
 
     maxValueBtn.addEventListener('click', () => {
-        const hecmathlon = new Hecmathlon(maxValueInput.value, getMaxValue)
-        const maxValue = getOutput(hecmathlon.result());
+        const hecmathlon = new Hecmathlon(maxValueInput.value, Hecmathlon.getMaxValue);
+        let result = hecmathlon.result();
+        const maxValue = getOutput(result);
         logResult(maxValueRoot, maxValue);
     });
     greaterThanBtn.addEventListener('click', () => {
-        const hecmathlon = new Hecmathlon(greaterThanInput.value, getGreaterThan);
+        const hecmathlon = new Hecmathlon(greaterThanInput.value, Hecmathlon.getGreaterThan);
         const greaterValues = getOutput(hecmathlon.result());
         logResult(greaterThanRoot, greaterValues);
     });
     fizzBuzzBtn.addEventListener('click', () => {
-        const hecmathlon = new Hecmathlon(fizzBuzzInput.value, fizzBuzz);
+        const hecmathlon = new Hecmathlon(fizzBuzzInput.value, Hecmathlon.fizzBuzz);
         const result = getOutput(hecmathlon.result());
         logResult(fizzBuzzRoot, result);
     });
 }
 
 function getOutput(output) {
+    if(!Array.isArray(output)){
+        output = [output];
+    }
     return ["The function starts", ...output, "The function ends"];
 }
 
