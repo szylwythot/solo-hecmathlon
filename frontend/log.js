@@ -63,9 +63,7 @@ function getOutput(output) {
 }
 
 function logResult(place, values){
-    place.innerHTML = "";
-    let htmlResult = values.map(resultItem => "<div>" + resultItem + "</div>").join("");
-    place.insertAdjacentHTML(`beforeend`, htmlResult);
+    place.innerHTML = values.map(resultItem => "<div>" + resultItem + "</div>").join("");
 }
 
 init();
